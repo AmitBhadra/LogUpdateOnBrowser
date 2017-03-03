@@ -1,0 +1,26 @@
+<html><head><title>Logs</title></head>
+<body>
+
+ <h1>Log Files are:</h1>
+<span id="connected">{{ connected }}</span>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+
+    $(document).ready(function() {
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    socket.on('connect2', function(connect2) {
+	   $("#connected").html(connect2.data);
+
+    });
+    socket.on('file_updated', function(file_updated) {                                  
+        console.log('the file has been updated');
+        $("#connected").html(file_updated.data);
+	
+    });
+});
+
+</script>
+</body></html>
